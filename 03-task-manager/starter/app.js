@@ -13,7 +13,7 @@ app.get('/hello', (request, responce) => {
     responce.status(200).send("Task Manager App")
 })
 
-const port = 3000
+const port = process.env.PORT
 const start = async () => {
     try {
         await connectDB(process.env.MONGO_URI)
