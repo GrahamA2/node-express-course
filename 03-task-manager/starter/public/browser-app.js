@@ -7,9 +7,12 @@ const formAlertDOM = document.querySelector('.form-alert')
 const showTasks = async () => {
   loadingDOM.style.visibility = 'visible'
   try {
+    console.log("Ready")
     const {
       data: { tasks },
     } = await axios.get('/api/v1/tasks')
+    console.log("Tasks: ", tasks)
+    
     if (tasks.length < 1) {
       tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>'
       loadingDOM.style.visibility = 'hidden'
@@ -38,6 +41,7 @@ const showTasks = async () => {
       .join('')
     tasksDOM.innerHTML = allTasks
   } catch (error) {
+    console.log("Error: ", error)
     tasksDOM.innerHTML =
       '<h5 class="empty-list">There was an error, please try later....</h5>'
   }

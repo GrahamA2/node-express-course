@@ -2,16 +2,15 @@ require('dotenv').config()
 const connectDB = require('./db/connect')
 const express = require('express')
 const tasks = require('./routes/tasks')
-
+const notFound = require('./middleware/not-found')
+const errorHandler= require('./middleware/error-handler')
 
 const app = express()
-
+app.use(express.static('./public'))
 app.use(express.json())
 app.use('/api/v1/tasks',tasks)
-
-app.get('/hello', (request, responce) => {
-    responce.status(200).send("Task Manager App")
-})
+app.use(notFound)
+app.use(errorHandler)
 
 const port = process.env.PORT
 const start = async () => {
